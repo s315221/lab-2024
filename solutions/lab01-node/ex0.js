@@ -11,5 +11,5 @@ function printShortenedStrings(stringArray = []) {
     )
 }
 
-const stringArray = ["spring", "it", "cat"];
+const stringArray = ["jupiter", "spring", "it", "cat", "a", ""];
 printShortenedStrings(stringArray);
