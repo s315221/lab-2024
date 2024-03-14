@@ -1,3 +1,5 @@
+"use strict";
+
 function printShortenedStrings(stringArray = []) {
     stringArray.forEach(
         str => {
