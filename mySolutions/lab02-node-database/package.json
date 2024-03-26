@@ -1,0 +1,17 @@
+{
+  "name": "lab02-node-database",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cp ../../lab02-node-database/films.db . && node filmLibrary.mjs",
+    "test": "nodemon -e mjs --exec \"npm run start\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "sqlite3": "^5.1.7"
+  }
+}
