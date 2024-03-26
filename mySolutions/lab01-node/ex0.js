@@ -13,5 +13,5 @@ function printShortenedStrings(stringArray = []) {
     )
 }
 
-const stringArray = ["jupiter", "spring", "it", "cat", "a", ""];
+const stringArray = ["spring", "summer", "a", "ab", "abc", "autumn", "winter", "Web App"];
 printShortenedStrings(stringArray);
