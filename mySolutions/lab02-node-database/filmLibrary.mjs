@@ -10,7 +10,7 @@ const db = new sqlite3.Database(
     }
 )
 
-function Film(id, title, isFavorite, rating, watchDate, userId) {
+export default function Film(id, title, isFavorite = 0, rating = null, watchDate = null, userId = 1) {
     this.id = id;
     this.title = title;
     this.isFavorite = isFavorite;
@@ -109,6 +109,77 @@ function FilmLibrary() {
             )
         }
     );
+
+
+
+
+
+
+
+
+
+
+
+    this.addFilm = (film) => new Promise(
+        (resolve, reject) => {
+            db.run(
+                `INSERT INTO films (title, isFavorite, rating, watchDate, userId) VALUES (?,?,?,?,?);`,
+                [
+                    film.title,
+                    film.isFavorite || 0,
+                    film.rating || null,
+                    film.watchDate ? dayjs(film.watchDate).format("YYYY-MM-DD") : null,
+                    film.userId,
+                ],
+                function (err) {
+                    if (err) reject(err);
+                    else {
+                        film.id = this.lastID;
+                        resolve(film);
+                    }
+                }
+            )
+        }
+    );
+
+    /**
+     * 2 b. Delete a movie from the database (using its ID as a reference). 
+     * After completion, print a confirmation/failure message.
+     */
+    this.deleteFilm = (id) => new Promise(
+        (resolve, reject) => {
+            db.run(
+                `DELETE FROM films WHERE id = ?`,
+                [id],
+                (err) => {
+                    if (err) reject('Insertion failed with err: ' + err);
+                    else resolve('Film deleted successfully');
+                }
+            );
+        }
+    );
+    /**
+     * c. Delete the watch date of all films stored in the database.
+     *  After completion, print a confirmation/failure message.
+     */
+    this.resetWatchDate = () => new Promise(
+        (resolve, reject) => {
+            db.run(
+                `UPDATE films 
+                SET watchDate=NULL;`,
+                (err) => {
+                    if (err) reject("Watch date reset failed: " + err);
+                    else resolve("Watch date reset successfully");
+                }
+            );
+        }
+    );
+
+    this.toString = async () => {
+        const films = await this.getFilms();
+        return films.map(film => film.toString());
+    };
+
 }
 
 
@@ -152,8 +223,44 @@ async function main() {
     console.log("***With title containing string: " + containsString + "***");
     const filmsWithTitleThatContains = await filmLibrary.getFilmsWithTitleContaining(containsString);
     filmsWithTitleThatContains.forEach(film => console.log(film.toString()));
-    console.log("\n")
+    console.log("\n");
 
+
+
+    // 2.a.
+    console.log(`\n****** Adding a new movie: ******`);
+    let newFilm = new Film(undefined, "Fast & Furious", false, 2, dayjs().toISOString(), 2);
+    let addedFilm = await filmLibrary.addFilm(newFilm);
+    console.log(await filmLibrary.toString());
+
+    console.log(`\n****** Adding a movie using default parameters: ******`);
+    newFilm = new Film(undefined, "2 Fast 2 Furious");
+    addedFilm = await filmLibrary.addFilm(newFilm);
+    console.log(await filmLibrary.toString());
+
+
+    // 2.b.
+    const filmID = addedFilm.id;
+    console.log(`\n****** Deleting the movie with ID '${filmID}': ******`);
+    console.log(await filmLibrary.deleteFilm(filmID));
+    console.log(await filmLibrary.toString());
+
+
+
+    // 2.c.
+    console.log(`\n****** Resetting all the watch dates: ******`);
+    console.log(await filmLibrary.resetWatchDate());
+    console.log(await filmLibrary.toString());
+
+
+
+
+
+    return;
 }
+
+
+
+
 
 main();
