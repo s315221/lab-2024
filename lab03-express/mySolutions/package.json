@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cp ../films.db ./films.db && node server.mjs",
-    "dev": "nodemon -e js,mjs --delay 2 --exec \"npm run start\" && exit 1"
+    "dev": "nodemon -e js,mjs --delay 1 --exec \"npm run start\" && exit 1"
   },
   "keywords": [],
   "author": "",
