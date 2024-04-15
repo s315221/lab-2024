@@ -3,13 +3,14 @@
 Film object in JSON format:
 
     {
-    "id":number,
-     "title": string,
-     "favorite" : boolean, 
-     "watchDate":string, 
-     "rating":number, 
-     "userId": number 
+    "id":number, // unique, mandatory
+     "title": string, // mandatory 
+     "favorite" : boolean, // optional, default FALSE
+     "watchDate":string, // optional, default NULL
+     "rating":number, // optional, range(1,5), default NULL
+     "userId": number // mandatory, default 1
     }
+
 Example film object in JSON format:
 
     {
@@ -20,6 +21,27 @@ Example film object in JSON format:
      "rating":5, 
      "userId": 1 
     }
+
+films table columns:
+
+    (
+        id         integer           not null
+            constraint films_pk
+                primary key autoincrement,
+        title      TEXT,
+        isFavorite INTEGER default 0 not null,
+        rating     INTEGER,
+        watchDate  TEXT,
+        userId     INTEGER           not null
+            constraint films_user_id_fk
+                references users
+                on update cascade on delete cascade,
+        constraint check_is_favorite
+            check (isFavorite IN (0, 1)),
+        constraint check_rating
+            check (rating BETWEEN 1 AND 5)
+    );
+
 
 | Description          | Method | URL                                | Request Body                             | Response (200 OK)     | Error                                                        |
 | -------------------- | ------ | ---------------------------------- | ---------------------------------------- | --------------------- | ------------------------------------------------------------ |

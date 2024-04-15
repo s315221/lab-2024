@@ -1,16 +1,18 @@
 "use strict";
 
 import sqlite3 from "sqlite3";
+sqlite3.verbose();
 
-export function Query() {
 
-}
 
-function Database(filename) {
+function Database(filename, options) {
     const db = new sqlite3.Database(filename ? filename : ":memory:", (err) => {
         if (err) throw err;
         console.log(`Database ${filename} opened!`);
     });
+    if (options.trace) {
+        db.on('trace', sql => console.log(sql));
+    }
 
     this.getRawDb = () => db;
 
@@ -26,13 +28,29 @@ function Database(filename) {
         }
     );
 
-    this.selectOne = (table, where, ...values) => new Promise(
+    this.selectOne = (table, where, values) => new Promise(
         (resolve, reject) => {
             db.get(`SELECT * FROM ${table} WHERE ${where}`,
                 values,
                 (err, row) => {
                     if (err) reject(err);
                     else resolve(row);
+                })
+        }
+    );
+
+    this.insert = (table, columns, values, placeHolderValues) => new Promise(
+        (resolve, reject) => {
+            db.run(`INSERT INTO ${table} ${columns} VALUES ${values}`,
+                placeHolderValues,
+                function (err) {
+                    if (err) {
+                        console.log(err)
+                        reject(err);
+                    }
+                    else {
+                        resolve(this.lastID);
+                    }
                 })
         }
     );

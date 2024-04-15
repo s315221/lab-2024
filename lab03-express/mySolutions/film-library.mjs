@@ -1,10 +1,10 @@
 "use strict";
 
-import Database, { Query } from "./db.mjs";
+import Database from "./db.mjs";
 import Film from "./film.mjs";
 
 export default function FilmLibrary() {
-    const db = new Database("./films.db");
+    const db = new Database("./films.db", { trace: true });
 
     this.getFilms = () => new Promise(
         (resolve, reject) => {
@@ -16,7 +16,7 @@ export default function FilmLibrary() {
 
     this.getFilmWithId = (id) => new Promise(
         (resolve, reject) => {
-            db.selectOne("films", "id = ?", id)
+            db.selectOne("films", "id=?", id)
                 .then((row) => {
                     if (row) resolve(new Film(row))
                     else resolve(undefined);
@@ -25,4 +25,25 @@ export default function FilmLibrary() {
         }
     );
 
+    this.addFilm = (film) => new Promise(
+        (resolve, reject) => {
+            const newFilm = new Film(film);
+            console.log("obtained new film:\n", newFilm);
+            db.insert("films",
+                "(title, isFavorite, watchDate, rating, userId)",
+                "(?, ?, ?, ?, ?)",
+                [
+                    newFilm.title,
+                    newFilm.isFavorite,
+                    newFilm.watchDate,
+                    newFilm.rating,
+                    newFilm.userId
+                ]
+            ).then(lastId => {
+                newFilm.id = lastId;
+                resolve(newFilm);
+            })
+                .catch(e => reject(e))
+        }
+    );
 }

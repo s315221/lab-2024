@@ -4,13 +4,12 @@ import express from "express";
 import morgan from "morgan";
 
 import FilmLibrary from "./film-library.mjs";
-import { param, validationResult } from "express-validator";
+import { body, param, validationResult } from "express-validator";
 
 const filmLibrary = new FilmLibrary();
 const app = express();
-
-app.use(morgan('dev'));
 app.use(express.json());
+app.use(morgan('dev'));
 
 app.get("/api/films/", (req, res) => {
     filmLibrary.getFilms()
@@ -18,11 +17,11 @@ app.get("/api/films/", (req, res) => {
         .catch(e => res.status(500).json(e.message));
 })
 
-app.get("/api/films/:id", param("id", "invalid id").exists().isInt(),
+app.get("/api/films/:id/", param("id", "invalid id").exists().isInt(),
     (req, res) => {
-        const results = validationResult(req).array();
-        if (results.length) {
-            return res.status(422).json(results.map(result => result.msg));
+        const results = validationResult(req);
+        if (!results.isEmpty()) {
+            return res.status(422).json(results.array().map(result => result.msg));
         }
         const id = parseInt(req.params.id);
         filmLibrary.getFilmWithId(id).
@@ -33,6 +32,27 @@ app.get("/api/films/:id", param("id", "invalid id").exists().isInt(),
             )
             .catch(e => res.status(500).json(e.message));
     });
+
+
+app.post(
+    "/api/films/",
+    [
+        body("title").isString().notEmpty(),
+        body("isFavorite").optional().isBoolean(),
+        body("watchDate").optional({ nullable: true }),
+        body("rating").optional({ nullable: true }).isInt({ min: 1, max: 5 }),
+        body("userId").optional().isInt(),
+    ],
+    (req, res) => {
+        const newFilmValidation = validationResult(req);
+        if (!newFilmValidation.isEmpty()) {
+            return res.status(422).json(newFilmValidation.array());
+        }
+        filmLibrary.addFilm(req.body)
+            .then(film => res.status(200).json(film))
+            .catch(e => res.status(503).json(e.message));
+    }
+);
 
 
 const PORT = 3000;
