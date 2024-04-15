@@ -1,4 +1,4 @@
-### get all films
+### get all films ###########################################################
 GET http://localhost:3000/api/films/
 
 
@@ -14,7 +14,7 @@ GET http://localhost:3000/api/films/99
 GET http://localhost:3000/api/films/{{$randomInt 1 6}} HTTP/1.1
 
 
-### add new film ###
+### add new film ###########################################################
 ### invalid title
 POST http://localhost:3000/api/films/
 Content-Type: application/json
@@ -46,4 +46,31 @@ Content-Type: application/json
 
 {
     "title": "The Hangover"
+}
+
+
+### add new film ###########################################################
+
+### invalid id
+PUT http://localhost:3000/api/films/a
+Content-Type: application/json
+
+{
+  "title": "The Hangover 2",
+  "isFavorite": true,
+  "rating": 5,
+  "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
+  "userId": 1
+}
+
+### valid parameters
+PUT http://localhost:3000/api/films/6
+Content-Type: application/json
+
+{
+  "title": "The Hangover 2",
+  "isFavorite": true,
+  "rating": 5,
+  "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
+  "userId": 1
 }

@@ -46,4 +46,19 @@ export default function FilmLibrary() {
                 .catch(e => reject(e))
         }
     );
+
+    this.updateFilm = async (id, rawFilm) => {
+        const film = new Film(rawFilm);
+        const numUpdated = await db.update(
+            "films",
+            "title = ?, isFavorite = ?, watchDate = ?, rating = ?, userId = ?",
+            "id = ?",
+            [film.title, film.isFavorite, film.watchDate, film.rating, film.userId, id]
+        );
+        if (numUpdated) {
+            film.id = id;
+            return film;
+        }
+        return null;
+    }
 }

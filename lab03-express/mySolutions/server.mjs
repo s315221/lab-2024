@@ -17,7 +17,9 @@ app.get("/api/films/", (req, res) => {
         .catch(e => res.status(500).json(e.message));
 })
 
-app.get("/api/films/:id/", param("id", "invalid id").exists().isInt(),
+app.get(
+    "/api/films/:id/",
+    param("id", "invalid id").exists().isInt(),
     (req, res) => {
         const results = validationResult(req);
         if (!results.isEmpty()) {
@@ -53,6 +55,35 @@ app.post(
             .catch(e => res.status(503).json(e.message));
     }
 );
+
+app.put(
+    "/api/films/:id/",
+    [
+        param("id", "invalid id").exists().isInt(),
+        body("title").isString().notEmpty(),
+        body("isFavorite").optional().isBoolean(),
+        body("watchDate").optional({ nullable: true }),
+        body("rating").optional({ nullable: true }).isInt({ min: 1, max: 5 }),
+        body("userId").optional().isInt(),
+    ],
+    (req, res) => {
+        const fieldValidation = validationResult(req);
+        if (!fieldValidation.isEmpty()) {
+            return res.status(422).json(fieldValidation.array());
+        }
+        const id = parseInt(req.params.id);
+        const rawFilm = req.body;
+        filmLibrary.updateFilm(id, rawFilm)
+            .then(film =>
+                film ?
+                    res.status(200).json(film)
+                    :
+                    res.status(404).json("Film not found")
+            )
+            .catch(e => res.status(503).json("Update Film: Database error"));
+    }
+);
+
 
 
 const PORT = 3000;

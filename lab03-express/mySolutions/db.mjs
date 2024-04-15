@@ -45,7 +45,7 @@ function Database(filename, options) {
                 placeHolderValues,
                 function (err) {
                     if (err) {
-                        console.log(err)
+                        //console.log(err)
                         reject(err);
                     }
                     else {
@@ -54,6 +54,20 @@ function Database(filename, options) {
                 })
         }
     );
+
+    this.update = async (table, set, where, values) => new Promise(
+        (resolve, reject) => {
+            db.run(
+                `UPDATE ${table} SET ${set} WHERE ${where};`,
+                values,
+                function (err) {
+                    if (err) return reject(err);
+                    else resolve(this.changes);
+                }
+            );
+        }
+    );
+
 };
 
 export default Database;
