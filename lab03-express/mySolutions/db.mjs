@@ -54,12 +54,22 @@ function Database(filename, options) {
                 })
         }
     );
+    /**
+     * Converts parameters to "UPDATE ${tableName} SET ${setClause} WHERE ${whereClause};".
+     * Values in params array replace any placeholders (?) in setClause and whereClause.
+     * @param {string} tableName 
+     * @param {string} setClause 
+     * @param {string} whereClause 
+     * @param {any[]} params  
+     * @returns on success, number of changes occurred else throws error
+     * 
+     */
 
-    this.update = async (table, set, where, values) => new Promise(
+    this.update = (tableName, setClause, whereClause, params) => new Promise(
         (resolve, reject) => {
             db.run(
-                `UPDATE ${table} SET ${set} WHERE ${where};`,
-                values,
+                `UPDATE ${tableName} SET ${setClause} WHERE ${whereClause};`,
+                params,
                 function (err) {
                     if (err) return reject(err);
                     else resolve(this.changes);
@@ -67,7 +77,6 @@ function Database(filename, options) {
             );
         }
     );
-
 };
 
 export default Database;

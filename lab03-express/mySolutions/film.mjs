@@ -10,10 +10,10 @@ export default function Film(film) {
     this.watchDate = film.watchDate ? dayjs(film.watchDate).format("YYYY-MM-DD") : null;
     this.userId = film.userId || 1;
 
-    /*this.toJSON = () => {
+    this.toJSON = () => {
         return {
             ...this,
             isFavorite: this.isFavorite ? true : false,
         };
-    }*/
+    }
 }

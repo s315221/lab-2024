@@ -72,15 +72,15 @@ app.put(
             return res.status(422).json(fieldValidation.array());
         }
         const id = parseInt(req.params.id);
-        const rawFilm = req.body;
-        filmLibrary.updateFilm(id, rawFilm)
+        const newFilm = req.body;
+        filmLibrary.updateFilmWithId(id, newFilm)
             .then(film =>
                 film ?
                     res.status(200).json(film)
                     :
                     res.status(404).json("Film not found")
             )
-            .catch(e => res.status(503).json("Update Film: Database error"));
+            .catch(e => console.log(e) && res.status(503).json("Update Film: Database error"));
     }
 );
 

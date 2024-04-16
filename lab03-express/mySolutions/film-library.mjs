@@ -47,17 +47,21 @@ export default function FilmLibrary() {
         }
     );
 
-    this.updateFilm = async (id, rawFilm) => {
-        const film = new Film(rawFilm);
-        const numUpdated = await db.update(
-            "films",
-            "title = ?, isFavorite = ?, watchDate = ?, rating = ?, userId = ?",
-            "id = ?",
-            [film.title, film.isFavorite, film.watchDate, film.rating, film.userId, id]
-        );
+    /**
+     * 
+     * @param {number} id Film id
+     * @param {{}} newValues Object with [key,value]=[columnName, newValue] 
+     * @returns updated film from database
+     */
+    this.updateFilmWithId = async (id, newValues) => {
+        const tableName = "films";
+        const setClause = Object.keys(newValues).map(key => `${key}=?`).join(",");
+        const params = Object.values(newValues);
+        const whereClause = "id=?";
+        const numUpdated = await db.update(tableName, setClause, whereClause, [...params, id]);
+
         if (numUpdated) {
-            film.id = id;
-            return film;
+            return await this.getFilmWithId(id);
         }
         return null;
     }
