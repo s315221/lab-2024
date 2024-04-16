@@ -84,6 +84,29 @@ app.put(
     }
 );
 
+app.put(
+    "/api/films/:id/favorite",
+    [
+        param("id", "invalid id").exists().isInt(),
+        body("isFavorite").exists().isBoolean(),
+    ],
+    (req, res) => {
+        const fieldValidation = validationResult(req);
+        if (!fieldValidation.isEmpty()) {
+            return res.status(422).json(fieldValidation.array());
+        }
+        const id = parseInt(req.params.id);
+        const isFavorite = req.body.isFavorite;
+        filmLibrary.updateFilmWithId(id, { isFavorite })
+            .then(film =>
+                film ?
+                    res.status(200).json(film)
+                    :
+                    res.status(404).json("Film not found")
+            )
+            .catch(e => console.log(e) && res.status(503).json("Update Film: Database error"));
+    }
+);
 
 
 const PORT = 3000;
