@@ -163,3 +163,96 @@ Content-Type: application/json
   "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
   "userId": 1
 }
+
+
+### update rating field of added film ###########################################################
+
+POST http://localhost:3000/api/films/
+Content-Type: application/json
+
+{
+    "title": "The Hangover"
+}
+
+### invalid id
+PUT http://localhost:3000/api/films/a/rating
+Content-Type: application/json
+
+{
+  "title": "The Hangover 2",
+  "isFavorite": true,
+  "rating": 5,
+  "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
+  "userId": 1
+}
+
+### inexistent id
+PUT http://localhost:3000/api/films/66/rating
+Content-Type: application/json
+
+{
+  "title": "The Hangover 2",
+  "isFavorite": true,
+  "rating": 5,
+  "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
+  "userId": 1
+}
+
+### invalid parameters
+PUT http://localhost:3000/api/films/6/rating
+Content-Type: application/json
+
+{
+  "title": "The Hangover 2",
+  "isFavorite": true,
+  "rating":"yes",
+  "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
+  "userId": 1
+}
+
+### valid inexistent parameters
+PUT http://localhost:3000/api/films/6/rating
+Content-Type: application/json
+
+{
+  "title": "The Hangover 2",
+  "isFavorite": true,
+  "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
+  "userId": 1
+}
+
+### valid parameters
+PUT http://localhost:3000/api/films/6/rating
+Content-Type: application/json
+
+{
+  "title": "The Hangover 2",
+  "isFavorite": true,
+  "rating": 3,
+  "watchDate": "{{$datetime 'YYYY-MM-DD'}}",
+  "userId": 1
+}
+
+
+### delete added film ###########################################################
+
+PUT http://localhost:3000/api/films/
+Content-Type: application/json
+
+{
+    "title": "The Hangover"
+}
+
+### invalid id
+DELETE http://localhost:3000/api/films/a
+
+### inexistent id
+DELETE http://localhost:3000/api/films/66
+
+
+### valid id
+DELETE http://localhost:3000/api/films/6
+
+### valid id, film inexistent after delete
+DELETE http://localhost:3000/api/films/6
+

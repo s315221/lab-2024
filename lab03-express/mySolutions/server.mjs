@@ -19,7 +19,7 @@ app.get("/api/films/", (req, res) => {
 
 app.get(
     "/api/films/:id/",
-    param("id", "invalid id").exists().isInt(),
+    param("id", "invalid id").isInt(),
     (req, res) => {
         const results = validationResult(req);
         if (!results.isEmpty()) {
@@ -59,7 +59,7 @@ app.post(
 app.put(
     "/api/films/:id/",
     [
-        param("id", "invalid id").exists().isInt(),
+        param("id", "invalid id").isInt(),
         body("title").isString().notEmpty(),
         body("isFavorite").optional().isBoolean(),
         body("watchDate").optional({ nullable: true }),
@@ -87,8 +87,8 @@ app.put(
 app.put(
     "/api/films/:id/favorite",
     [
-        param("id", "invalid id").exists().isInt(),
-        body("isFavorite").exists().isBoolean(),
+        param("id", "invalid id").isInt(),
+        body("isFavorite").isBoolean(),
     ],
     (req, res) => {
         const fieldValidation = validationResult(req);
@@ -105,6 +105,53 @@ app.put(
                     res.status(404).json("Film not found")
             )
             .catch(e => console.log(e) && res.status(503).json("Update Film: Database error"));
+    }
+);
+
+app.put(
+    "/api/films/:id/rating",
+    [
+        param("id", "invalid id").isInt(),
+        body("rating").optional({ nullable: true }).isInt({ min: 1, max: 5 }),
+    ],
+    (req, res) => {
+        const fieldValidation = validationResult(req);
+        if (!fieldValidation.isEmpty()) {
+            return res.status(422).json(fieldValidation.array());
+        }
+        const id = parseInt(req.params.id);
+        filmLibrary.updateFilmWithId(id, { rating: req.body.rating })
+            .then(film =>
+                film ?
+                    res.status(200).json(film)
+                    :
+                    res.status(404).json("Film not found")
+            )
+            .catch(e => console.log(e) && res.status(503).json("Update Film: Database error"));
+    }
+);
+
+
+
+app.delete(
+    "/api/films/:id/",
+    [
+        param("id", "invalid id").isInt(),
+    ],
+    (req, res) => {
+        const fieldValidation = validationResult(req);
+        if (!fieldValidation.isEmpty()) {
+            return res.status(422).json(fieldValidation.array());
+        }
+        const id = parseInt(req.params.id);
+        filmLibrary.deleteFilmWithId(id)
+            .then(numDeleted =>
+                numDeleted ?
+                    res.status(200).json({ numDeleted: numDeleted })
+                    :
+                    res.status(404).json("Film not found")
+            )
+            .catch(e => console.log(e) && res.status(503).json("Delete Film: Database error"));
     }
 );
 

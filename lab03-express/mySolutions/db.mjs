@@ -77,6 +77,20 @@ function Database(filename, options) {
             );
         }
     );
+
+    this.delete = (tableName, whereClause, params) => new Promise(
+        (resolve, reject) => {
+            db.run(
+                `DELETE FROM ${tableName} WHERE ${whereClause};`,
+                params,
+                function (err) {
+                    if (err) return reject(err);
+                    else resolve(this.changes);
+                }
+            );
+        }
+    );
+
 };
 
 export default Database;
