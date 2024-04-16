@@ -51,4 +51,4 @@ films table columns:
 | Update film values   | PUT    | /api/films/:id/          | film (no id field, updated other fields) | updated film          | 404(film not found), 422(invalid input), 503(database error) |
 | Update film rating   | PUT    | /api/films/:id/rating/   | {"rating": number}                       | updated film          | 404(film not found), 422(invalid input), 503(database error) |
 | Mark as favorite     | PUT    | /api/films/:id/favorite/ | {"isFavorite" : boolean}                 | updated film          | 404(film not found), 422(invalid input), 503(database error) |
-| Delete existing film | DELETE | /api/films/:id/          | None                                     | Deleted film          | 404(film not found), 503(database error)                     |
+| Delete existing film | DELETE | /api/films/:id/          | None                                     | Deleted films count   | 404(film not found), 503(database error)                     |
