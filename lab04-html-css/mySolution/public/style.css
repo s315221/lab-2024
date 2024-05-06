@@ -1,4 +1,3 @@
-
 .bi-collection-play {
     font-size: xx-large;
 }
@@ -9,4 +8,13 @@
 
 .bi-plus {
     font-size: xx-large;
+}
+
+filter-list {
+
+    .btn.active,
+    .btn:hover {
+        background-color: #055c9d;
+        color: #fff;
+    }
 }

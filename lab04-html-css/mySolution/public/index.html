@@ -27,13 +27,13 @@
 
 </head>
 
-<body class="">
-
+<body class="d-flex flex-column">
     <header class="Navbar-Logo-SearchBox-User text-light">
         <nav class="navbar bg-primary">
             <div class="container-fluid">
-                <brand-logo class="bi bi-collection-play">
-                    Film Library
+                <brand-logo>
+                    <i class="bi bi-collection-play"></i>
+                    <text class="h3">Film Library</text>
                 </brand-logo>
                 <search-box>
                     <form class="d-flex" role="search">
@@ -48,16 +48,16 @@
     </header>
 
     <main class="Filters-Films">
-        <div class="container-fluid">
-            <div class="row">
-                <filter-list class="col-3 bg-secondary-subtle">
-                    <ul class="list-group">
-                        <li class="list-group-item active">All</li>
-                        <li class="list-group-item">Favorites</li>
-                        <li class="list-group-item">Best Rated</li>
-                        <li class="list-group-item">Seen Last Month</li>
-                        <li class="list-group-item">Unseen</li>
-                    </ul>
+        <div class="d-flex flex-column">
+            <div class="d-flex flex-row">
+                <filter-list class="bg-secondary-subtle">
+                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                        <button type="button" class="btn active">All</button>
+                        <button type="button" class="btn">Favorites</button>
+                        <button type="button" class="btn">Best Rated</button>
+                        <button type="button" class="btn">Seen Last Month</button>
+                        <button type="button" class="btn">Unseen</button>
+                    </div>
                 </filter-list>
                 <film-table class="col-9">
                     <h1>All</h1>
@@ -191,7 +191,7 @@
 
 
 <button-add-film>
-    <div class="position-absolute bottom-0 end-0 translate-middle">
+    <div class="position-fixed bottom-0 end-0 transparency translate-middle">
         <button class="btn rounded-circle bg-primary text-light">
             <i class="bi bi-plus"></i>
         </button>
