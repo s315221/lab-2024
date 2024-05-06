@@ -28,173 +28,170 @@
 </head>
 
 <body class="d-flex flex-column">
-    
-    <header class="text-light">
-        <nav class="navbar bg-primary">
-            <div class="container-fluid">
-                <brand-logo>
-                    <i class="bi bi-collection-play"></i>
-                    <text class="h3">Film Library</text>
-                </brand-logo>
-                <search-box>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" />
-                    </form>
-                </search-box>
-                <user-icon>
-                    <i class="bi bi-person-circle"></i>
-                </user-icon>
+
+    <header class="d-flex flex-row">
+        <nav class="navbar flex-grow-1 p-2 bg-primary text-light">
+            <brand-logo>
+                <i class="bi bi-collection-play"></i>
+                <text class="h3">Film Library</text>
+            </brand-logo>
+            <search-box>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" />
+                </form>
+            </search-box>
+            <user-icon>
+                <i class="bi bi-person-circle"></i>
+            </user-icon>
             </div>
         </nav>
     </header>
 
-    <main class="Filters-Films">
-        <div class="d-flex flex-column flex-grow-1">
-            <div class="d-flex flex-row">
-                <filter-list class="bg-secondary-subtle">
-                    <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                        <button type="button" class="btn active">All</button>
-                        <button type="button" class="btn">Favorites</button>
-                        <button type="button" class="btn">Best Rated</button>
-                        <button type="button" class="btn">Seen Last Month</button>
-                        <button type="button" class="btn">Unseen</button>
-                    </div>
-                </filter-list>
-                <film-table class="col-9">
-                    <h1>All</h1>
-                    <table class="table">
-                        <thead></thead>
-                        <tbody>
-                            <tr>
-                                <td>Pulp Fiction</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" checked>
-                                        <label class="form-check-label">
-                                            Favorite
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>March 12, 2023</td>
-                                <td>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil"></i>
-                                    <i class="bi bi-trash"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>21 Grams</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" checked>
-                                        <label class="form-check-label">
-                                            Favorite
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>March 13, 2023</td>
-                                <td>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil"></i>
-                                    <i class="bi bi-trash"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Star Wars</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        <label class="form-check-label">
-                                            Favorite
-                                        </label>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil"></i>
-                                    <i class="bi bi-trash"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Matrix</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        <label class="form-check-label">
-                                            Favorite
-                                        </label>
-                                    </div>
-                                </td>
-                                <td></td>
-                                <td>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil"></i>
-                                    <i class="bi bi-trash"></i>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Shrek</td>
-                                <td>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="">
-                                        <label class="form-check-label">
-                                            Favorite
-                                        </label>
-                                    </div>
-                                </td>
-                                <td>March 21, 2023</td>
-                                <td>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star"></i>
-                                    <i class="bi bi-star"></i>
-                                </td>
-                                <td>
-                                    <i class="bi bi-pencil"></i>
-                                    <i class="bi bi-trash"></i>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <main class="d-flex flex-row border vh-100">
+        <filter-list class="d-flex flex-column bg-secondary-subtle">
+            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                <button type="button" class="btn active">All</button>
+                <button type="button" class="btn">Favorites</button>
+                <button type="button" class="btn">Best Rated</button>
+                <button type="button" class="btn">Seen Last Month</button>
+                <button type="button" class="btn">Unseen</button>
             </div>
-            </film-table>
-        </div>
+        </filter-list>
+        <film-table class="d-flex flex-column flex-fill">
+            <div class="d-flex flex-row">
+                <h1>All</h1>
+            </div>
+            <div class="d-flex flex-row">
+                <table class="table">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td>Pulp Fiction</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" checked>
+                                    <label class="form-check-label">
+                                        Favorite
+                                    </label>
+                                </div>
+                            </td>
+                            <td>March 12, 2023</td>
+                            <td>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                            </td>
+                            <td>
+                                <i class="bi bi-pencil"></i>
+                                <i class="bi bi-trash"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>21 Grams</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" checked>
+                                    <label class="form-check-label">
+                                        Favorite
+                                    </label>
+                                </div>
+                            </td>
+                            <td>March 13, 2023</td>
+                            <td>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                            </td>
+                            <td>
+                                <i class="bi bi-pencil"></i>
+                                <i class="bi bi-trash"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Star Wars</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Favorite
+                                    </label>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            </td>
+                            <td>
+                                <i class="bi bi-pencil"></i>
+                                <i class="bi bi-trash"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Matrix</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Favorite
+                                    </label>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            </td>
+                            <td>
+                                <i class="bi bi-pencil"></i>
+                                <i class="bi bi-trash"></i>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Shrek</td>
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="">
+                                    <label class="form-check-label">
+                                        Favorite
+                                    </label>
+                                </div>
+                            </td>
+                            <td>March 21, 2023</td>
+                            <td>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star-fill"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                            </td>
+                            <td>
+                                <i class="bi bi-pencil"></i>
+                                <i class="bi bi-trash"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </film-table>
+        <button-add-film>
+            <div class="position-fixed bottom-0 end-0 transparency translate-middle">
+                <button class="btn rounded-circle bg-primary text-light">
+                    <i class="bi bi-plus"></i>
+                </button>
+            </div>
+        </button-add-film>
     </main>
 </body>
 
 </html>
-
-
-<button-add-film>
-    <div class="position-fixed bottom-0 end-0 transparency translate-middle">
-        <button class="btn rounded-circle bg-primary text-light">
-            <i class="bi bi-plus"></i>
-        </button>
-    </div>
-</button-add-film>
