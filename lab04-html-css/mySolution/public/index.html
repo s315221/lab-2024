@@ -31,11 +31,15 @@
 
     <header class="d-flex flex-row">
         <nav class="navbar flex-grow-1 p-2 bg-primary text-light">
+            <button class="navbar-toggler d-sm-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsable">
+                <span class="bi bi-list bg-primary text-light"></span>
+            </button>
             <brand-logo>
                 <i class="bi bi-collection-play"></i>
                 <text class="h3">Film Library</text>
             </brand-logo>
-            <search-box>
+            <search-box class="d-none d-sm-block">
                 <form class="d-flex" role="search">
                     <input class="form-control me-2" type="search" placeholder="Search" />
                 </form>
@@ -48,7 +52,7 @@
     </header>
 
     <main class="d-flex flex-row">
-        <filter-list class="d-flex flex-column bg-secondary-subtle">
+        <filter-list class="d-flex flex-column bg-secondary-subtle" >
             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
                 <button type="button" class="btn active">All</button>
                 <button type="button" class="btn">Favorites</button>
