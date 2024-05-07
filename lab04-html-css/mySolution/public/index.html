@@ -52,13 +52,15 @@
     </header>
 
     <main class="d-flex flex-row">
-        <filter-list class="d-flex flex-column bg-secondary-subtle" >
+        <filter-list class="d-flex flex-column bg-secondary-subtle col-3 align-self-start">
+            <br>
+            <h5 class="">Filters</h5>
             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
-                <button type="button" class="btn active">All</button>
-                <button type="button" class="btn">Favorites</button>
-                <button type="button" class="btn">Best Rated</button>
-                <button type="button" class="btn">Seen Last Month</button>
-                <button type="button" class="btn">Unseen</button>
+                <button type="button" class="btn text-start active ">All</button>
+                <button type="button" class="btn text-start">Favorites</button>
+                <button type="button" class="btn text-start">Best Rated</button>
+                <button type="button" class="btn text-start">Seen Last Month</button>
+                <button type="button" class="btn text-start">Unseen</button>
             </div>
         </filter-list>
         <film-table class="d-flex flex-column flex-fill">
