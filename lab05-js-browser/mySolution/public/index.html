@@ -2,168 +2,101 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Title: displayed in your browser's tab -->
     <title>Film Library</title>
+
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Custom CSS for this document -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Bootstrap bundle script-->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-    <script defer="./FilmLibrary.mjs"></script>
+
+    <!-- Film Library -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script defer src="FilmLibrary.mjs"></script>
+
 </head>
 
-<body>
-    <div class="container-fluid">
-        <div class="row">
-            <nav class="navbar bg-primary justify-content-between">
-                <div class="navbar-brand">
-                    <i class="bi bi-collection-play"></i>
-                    Film Library
-                </div>
-                <div>
-                    <input class="rounded" placeholder="Search" />
-                </div>
-                <i class="bi bi-person-circle"></i>
-            </nav>
-        </div>
-        <div class="row">
-            <div class="container-fluid py-3">
-                <div class="row justify-content-between">
-                    <div class="col-3">
-                        <ul class="nav nav-pills flex-column col-8">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">
-                                    All
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Favorites
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Best Rated
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Seen Last Month
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">
-                                    Unseen
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <h1>
-                            All
-                        </h1>
-                        <table class="table ">
-                            <thead></thead>
-                            <tbody>
-                                <tr>
-                                    <td> Pulp Fiction </td>
-                                    <td><input type="checkbox" checked="true"> Favorite </td>
-                                    <td><text>March 10, 2024</text></td>
-                                    <td>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pencil"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>21 Grams</td>
-                                    <td><input type="checkbox" checked="true"> Favorite </td>
-                                    <td><text>March 17, 2024</text></td>
-                                    <td>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pencil"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Star Wars</td>
-                                    <td><input type="checkbox"> Favorite </td>
-                                    <td><text></text></td>
-                                    <td>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pencil"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Matrix</td>
-                                    <td><input type="checkbox"> Favorite </td>
-                                    <td><text></text></td>
-                                    <td>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pencil"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Shrek</td>
-                                    <td><input type="checkbox"> Favorite </td>
-                                    <td><text>March 21, 2023</text></td>
-                                    <td>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star-fill"></i>
-                                        <i class="bi bi-star"></i>
-                                        <i class="bi bi-star"></i>
-                                    </td>
-                                    <td>
-                                        <i class="bi bi-pencil"></i>
-                                        <i class="bi bi-trash"></i>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-end">
-            <div class="col col-1">
-                <button class="btn rounded-circle bg-primary">
-                    <i class="bi bi-plus"></i>
-                </button>
+<body class="d-flex flex-column">
 
+    <header class="d-flex flex-row">
+        <nav class="navbar flex-grow-1 p-2 bg-primary text-light">
+            <button class="navbar-toggler d-sm-none" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapsable">
+                <span class="bi bi-list bg-primary text-light"></span>
+            </button>
+            <brand-logo>
+                <i class="bi bi-collection-play"></i>
+                <text class="h3">Film Library</text>
+            </brand-logo>
+            <search-box class="d-none d-sm-block">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" />
+                </form>
+            </search-box>
+            <user-icon>
+                <i class="bi bi-person-circle"></i>
+            </user-icon>
             </div>
+        </nav>
+    </header>
+
+    <main class="d-flex flex-column flex-sm-row">
+        <search-box class="collapse d-sm-none flex-fill flex-column align-self-stretch m-2" id="collapsable">
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" />
+            </form>
+        </search-box>
+        <filter-list class="d-flex flex-row col-sm-3 align-items-start bg-light">
+            <div class="collapse d-sm-flex flex-fill flex-column " id="collapsable">
+                <br>
+                <h5 class="">Filters</h5>
+                <div class="btn-group-vertical d-flex flex-fill" role="group" aria-label="Vertical button group">
+                    <button type="button" class="btn text-start active ">All</button>
+                    <button type="button" class="btn text-start">Favorites</button>
+                    <button type="button" class="btn text-start">Best Rated</button>
+                    <button type="button" class="btn text-start">Seen Last Month</button>
+                    <button type="button" class="btn text-start">Unseen</button>
+                </div>
+            </div>
+        </filter-list>
         </div>
-    </div>
+        <film-table class="d-flex flex-column flex-fill">
+            <div class="d-flex flex-row">
+                <h1>All</h1>
+            </div>
+            <div class="d-flex flex-row">
+                <table class="table">
+                    <thead></thead>
+                    <tbody id="film-list">
+
+                    </tbody>
+                </table>
+            </div>
+            <button-add-film>
+                <div class="position-fixed bottom-0 end-0 transparency translate-middle">
+                    <button class="btn rounded-circle bg-primary text-light">
+                        <i class="bi bi-plus"></i>
+                    </button>
+                </div>
+            </button-add-film>
+        </film-table>
+
+    </main>
 </body>
 
 </html>

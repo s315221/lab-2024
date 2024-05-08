@@ -9,3 +9,25 @@
 .bi-plus {
     font-size: xx-large;
 }
+
+.bi-star-fill,
+.bi-star:hover {
+    color: gold
+}
+
+.bi-pencil:hover {
+    color: blue
+}
+
+.bi-trash:hover {
+    color: red
+}
+
+filter-list {
+
+    .btn.active,
+    .btn:hover {
+        background-color: #055c9d;
+        color: #fff;
+    }
+}

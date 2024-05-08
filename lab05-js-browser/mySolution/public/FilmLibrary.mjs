@@ -4,8 +4,6 @@
  * 1.  Create a Film Library
  */
 
-import dayjs from "dayjs"; // 2
-
 function Film(id, title, isFavorite = false, date, rating, userId = 1) {
     this.id = id;
     this.title = title;
@@ -43,7 +41,7 @@ function FilmLibrary() {
 }
 
 
-function main() {
+function mainConsole() {
 
     // Creating some film entries
     const pulpFiction = new Film(1, "Pulp Fiction", true, "2024-03-10", 5);
@@ -82,6 +80,81 @@ function main() {
     filmLibrary.addNewFilm(new Film(5, "Shrek", false, "March 21, 2024", 3, 1));
 
     console.log("\n\n\n\nget rated:\n", filmLibrary.getRated().map(film => film.toString()));
+}
+
+
+/**Lab 05 **/
+
+
+
+/*Exercise 1*/
+
+/**
+ * @param {Film} film
+ * @returns {string} film as html td element
+ */
+function filmToTableRow(film) {
+
+    const ratingToIcons = function (rating) {
+        return [1, 2, 3, 4, 5]
+            .map(i => `<i class="bi bi-star${rating >= i ? "-fill" : ''}"></i>`)
+            .join('\n');
+    }
+
+    return `<tr>
+                <td>${film.title}</td>
+                <td>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" ${film.isFavorite ? "checked" : ''}>
+                        <label class="form-check-label">
+                            Favorite
+                        </label>
+                    </div>
+                </td>
+                <td>${film.date ? dayjs(film.date).format('MMMM DD, YYYY') : ''}</td>
+                <td>
+                ${ratingToIcons(film.rating)}
+                </td>
+                <td>
+                    <i class="bi bi-pencil"></i>
+                    <i class="bi bi-trash"></i>
+                </td>
+            </tr> `;
+}
+
+
+/**
+ * @param {FilmLibrary} filmLibrary 
+ * @returns void
+ * inserts films in filmLibrary as a table rows in film table
+ */
+function pagePopulateFilmTable(filmLibrary) {
+
+    const filmListElement = document.getElementById("film-list");
+    filmListElement.innerHTML = filmLibrary.films.map(
+        film => filmToTableRow(film)
+    ).join('\n');
+}
+
+
+function main() {
+    // Creating some film entries
+    const pulpFiction = new Film(1, "Pulp Fiction", true, "2024-03-10", 5);
+    const grams21 = new Film(2, "21 Grams", true, "2024-03-17", 4);
+    const starWars = new Film(3, "Star Wars", false);
+    const matrix = new Film(4, "Matrix");
+    const shrek = new Film(5, "Shrek", false, "2024-03-21", 3);
+
+    let filmLibrary = new FilmLibrary();
+    filmLibrary.addNewFilm(pulpFiction);
+    filmLibrary.addNewFilm(grams21);
+    filmLibrary.addNewFilm(starWars);
+    filmLibrary.addNewFilm(matrix);
+    filmLibrary.addNewFilm(shrek);
+
+    pagePopulateFilmTable(filmLibrary);
+
+
 }
 
 main();
