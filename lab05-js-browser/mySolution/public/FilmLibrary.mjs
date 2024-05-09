@@ -47,7 +47,7 @@ const grams21 = new Film(2, "21 Grams", true, "2024-04-17", 4);
 const starWars = new Film(3, "Star Wars", false);
 const matrix = new Film(4, "Matrix", true);
 const shrek = new Film(5, "Shrek", false, "2024-04-21", 3);
-const shrek2 = new Film(5, "Shrek", false, "2024-04-01", 3);
+const shrek2 = new Film(5, "Shrek 2", false, "2024-04-01", 3);
 
 let filmLibrary = new FilmLibrary();
 filmLibrary.addNewFilm(pulpFiction);
