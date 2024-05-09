@@ -34,27 +34,40 @@ function FilmLibrary() {
 
     this.getBestRated = () => this.films.filter(film => film.rating >= 5);
 
-    /**
-     * @param {string} date
-     */
-    this.getSeenAfter = (date) => {
-        console.log(date, dayjs())
-        return this.films.filter(film => film.date && dayjs(film.date).isSame(dayjs(date)));
-    }
+    this.getSeenAfter = (date) => this.films.filter(film => film.date && (dayjs(film.date).isSame(dayjs(date)) || dayjs(film.date).isAfter(dayjs(date))));
 
     this.getUnSeen = () => this.films.filter(film => !film.date)
 }
 
 /**Lab 05 **/
 
-/*Exercise 1*/
+// Preparing film library
+const pulpFiction = new Film(1, "Pulp Fiction", true, "2024-04-10", 5);
+const grams21 = new Film(2, "21 Grams", true, "2024-04-17", 4);
+const starWars = new Film(3, "Star Wars", false);
+const matrix = new Film(4, "Matrix", true);
+const shrek = new Film(5, "Shrek", false, "2024-04-21", 3);
+const shrek2 = new Film(5, "Shrek", false, "2024-04-01", 3);
+
+let filmLibrary = new FilmLibrary();
+filmLibrary.addNewFilm(pulpFiction);
+filmLibrary.addNewFilm(grams21);
+filmLibrary.addNewFilm(starWars);
+filmLibrary.addNewFilm(matrix);
+filmLibrary.addNewFilm(shrek);
+filmLibrary.addNewFilm(shrek2);
+
+
+
+
+/*Exercise 1*************************************************************************************************/
 
 /**
  * @param {Film} film
  * @returns {string} film as html td element
  */
 function filmToTableRow(film) {
-    console.log('populating ', film)
+    //console.log('populating ', film)
     const ratingToIcons = function (rating) {
         return [1, 2, 3, 4, 5]
             .map(i => `<i class="bi bi-star${rating >= i ? "-fill" : ''}"></i>`)
@@ -96,78 +109,58 @@ function pagePopulateFilmTable(filmArray) {
     ).join('\n');
 }
 
-function pageSetActiveFilter() {
+
+pagePopulateFilmTable(filmLibrary.films);
+
+
+
+/*Exercise 2*************************************************************************************************/
+
+
+let currentFilterButton = document.getElementById("filter-all");
+
+/**
+* @param {Event} event
+*/
+function filterHandler(event) {
+    const clickedFilterButton = event.target;
+    const filmTableTitleString = clickedFilterButton.innerText;
+    const filmArray = [];
+
+    switch (clickedFilterButton.id) {
+        case "filter-all":
+            filmArray.push(...filmLibrary.films);
+            break;
+        case "filter-favorites":
+            filmArray.push(...filmLibrary.getFavorites());
+            break;
+        case "filter-bestRated":
+            filmArray.push(...filmLibrary.getBestRated());
+            break;
+        case "filter-seenLastMonth":
+            filmArray.push(...filmLibrary.getSeenAfter(dayjs().subtract(1, 'month').startOf('month')));
+            break;
+        case "filter-unseen":
+            filmArray.push(...filmLibrary.getUnSeen());
+            break;
+        default:
+    }
+
+    currentFilterButton.className = currentFilterButton.className.replace(" active", "");
+    currentFilterButton = clickedFilterButton;
+    currentFilterButton.className = currentFilterButton.className.concat(" active");
+
+    document.getElementById("film-table-title").innerText = filmTableTitleString;
+
+    pagePopulateFilmTable(filmArray);
 
 }
 
-
-function main() {
-    // Creating some film entries
-    const pulpFiction = new Film(1, "Pulp Fiction", true, "2024-04-10", 5);
-    const grams21 = new Film(2, "21 Grams", true, "2024-04-17", 4);
-    const starWars = new Film(3, "Star Wars", false);
-    const matrix = new Film(4, "Matrix", true);
-    const shrek = new Film(5, "Shrek", false, "2024-04-21", 3);
-    const shrek2 = new Film(5, "Shrek", false, "2024-04-01", 3);
-
-    let filmLibrary = new FilmLibrary();
-    filmLibrary.addNewFilm(pulpFiction);
-    filmLibrary.addNewFilm(grams21);
-    filmLibrary.addNewFilm(starWars);
-    filmLibrary.addNewFilm(matrix);
-    filmLibrary.addNewFilm(shrek);
-    filmLibrary.addNewFilm(shrek2);
-
-    /*Exercise 1*/
-    pagePopulateFilmTable(filmLibrary.films);
-
-    /*Exercise 2*/
-
-    /**
-    * @param {Event} event
-    * @param {FilmLibrary} filmLibrary 
-    */
-
-    let previousSelectedFilterButton = document.getElementById("filter-all");
-
-    function filterHandler(event, filmLibrary) {
-        const filterButton = event.target;
-        const filterId = filterButton.id;
-        switch (filterId) {
-            case "filter-all":
-                pagePopulateFilmTable(filmLibrary.films);
-                break;
-            case "filter-favorites":
-                pagePopulateFilmTable(filmLibrary.getFavorites());
-                break;
-            case "filter-bestRated":
-                pagePopulateFilmTable(filmLibrary.getBestRated());
-                break;
-            case "filter-seenLastMonth":
-                pagePopulateFilmTable(filmLibrary.getSeenAfter(dayjs().subtract(1, 'month').startOf('month')));
-                break;
-            case "filter-unseen":
-                pagePopulateFilmTable(filmLibrary.getUnSeen());
-                break;
-            default:
-                pagePopulateFilmTable([]);
-        }
-
-
-        previousSelectedFilterButton.className = previousSelectedFilterButton.className.replace(" active", "");
-        let currentSelectedFilterButton = document.getElementById(filterId);
-        currentSelectedFilterButton.className = currentSelectedFilterButton.className.concat(" active");
-        previousSelectedFilterButton = currentSelectedFilterButton;
-
-    }
-
-    const filterButtonElements = document.getElementsByTagName("filter-button");
-    for (const filterButtonElement of filterButtonElements) {
-        filterButtonElement.addEventListener('click', (e) => filterHandler(e, filmLibrary));
-    }
-
-
+const filterButtonElements = document.getElementsByTagName("filter-button");
+for (const filterButtonElement of filterButtonElements) {
+    filterButtonElement.addEventListener('click', (e) => filterHandler(e, filmLibrary));
 }
 
 
-main();
+
+
