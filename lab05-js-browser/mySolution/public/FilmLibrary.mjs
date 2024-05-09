@@ -47,7 +47,7 @@ const grams21 = new Film(2, "21 Grams", true, "2024-04-17", 4);
 const starWars = new Film(3, "Star Wars", false);
 const matrix = new Film(4, "Matrix", true);
 const shrek = new Film(5, "Shrek", false, "2024-04-21", 3);
-const shrek2 = new Film(5, "Shrek 2", false, "2024-04-01", 3);
+const shrek2 = new Film(52, "Shrek 2", false, "2024-04-01", 3);
 
 let filmLibrary = new FilmLibrary();
 filmLibrary.addNewFilm(pulpFiction);
@@ -74,7 +74,7 @@ function filmToTableRow(film) {
             .join('\n');
     }
 
-    return `<tr>
+    return `<tr id="film-id-${film.id}">
                 <td>${film.title}</td>
                 <td>
                     <div class="form-check">
@@ -90,7 +90,7 @@ function filmToTableRow(film) {
                 </td>
                 <td>
                     <i class="bi bi-pencil"></i>
-                    <i class="bi bi-trash"></i>
+                    <i class="bi bi-trash" onClick="deleteHandler(${film.id})";></i>
                 </td>
             </tr> `;
 }
@@ -117,17 +117,13 @@ pagePopulateFilmTable(filmLibrary.films);
 /*Exercise 2*************************************************************************************************/
 
 
-let currentFilterButton = document.getElementById("filter-all");
+let activeFilterButton = document.getElementById("filter-all");
 
-/**
-* @param {Event} event
-*/
-function filterHandler(event) {
-    const clickedFilterButton = event.target;
-    const filmTableTitleString = clickedFilterButton.innerText;
+function pagePopulateFilteredFilmTable(filterButton) {
+    const filmTableTitleString = filterButton.innerText;
     const filmArray = [];
 
-    switch (clickedFilterButton.id) {
+    switch (filterButton.id) {
         case "filter-all":
             filmArray.push(...filmLibrary.films);
             break;
@@ -146,21 +142,33 @@ function filterHandler(event) {
         default:
     }
 
-    currentFilterButton.className = currentFilterButton.className.replace(" active", "");
-    currentFilterButton = clickedFilterButton;
-    currentFilterButton.className = currentFilterButton.className.concat(" active");
+    activeFilterButton.className = activeFilterButton.className.replace(" active", "");
+    activeFilterButton = filterButton;
+    activeFilterButton.className = activeFilterButton.className.concat(" active");
 
     document.getElementById("film-table-title").innerText = filmTableTitleString;
 
     pagePopulateFilmTable(filmArray);
+}
 
+/**
+* @param {Event} event
+*/
+function filterHandler(event) {
+    const clickedFilterButton = event.target;
+    pagePopulateFilteredFilmTable(clickedFilterButton);
 }
 
 const filterButtonElements = document.getElementsByTagName("filter-button");
 for (const filterButtonElement of filterButtonElements) {
-    filterButtonElement.addEventListener('click', (e) => filterHandler(e, filmLibrary));
+    filterButtonElement.addEventListener('click', filterHandler);
 }
 
 
+/*Exercise 3**********************************************************************************************/
 
-
+//add onClick="deleteHandler" in trash icon
+function deleteHandler(filmId) {
+    filmLibrary.deleteFilm(filmId);
+    pagePopulateFilteredFilmTable(activeFilterButton);
+}
