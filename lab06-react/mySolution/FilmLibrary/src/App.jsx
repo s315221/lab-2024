@@ -16,7 +16,14 @@ function App() {
 
   return (
     <>
-      <NavigationBar />
+      <div className='d-flex flex-column'>
+        <header className="d-flex flex-row">
+          <NavigationBar className='d-flex flex-fill justify-content-between align-items-center p-2 bg-primary text-light border' />
+        </header>
+        <div className='d-flex flex-row border'>
+          Sidebar     FilmList
+        </div>
+      </div>
     </>
   )
 }

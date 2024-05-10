@@ -1,17 +1,32 @@
-import { CollectionPlayFill, PersonCircle, List } from 'react-bootstrap-icons'
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
+import Branding from './Branding';
+import Form from 'react-bootstrap/Form';
+import { PersonCircle } from 'react-bootstrap-icons';
 
-export default function NavigationBar() {
+export default function NavigationBar(props) {
     return (
-        <header className="d-flex flex-row">
-            <nav className="navbar flex-grow-1 p-2 bg-primary text-light">
-                <button className="navbar-toggler d-sm-none" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#collapsable">
+        <div className={props.className}>
+            <div className='d-flex flex-col'>
+                <Branding fontSize={'xx-large'} />
+            </div>
+            <div className='d-flex flex-col'>
+                <Form.Control type="search" placeholder='Search'></Form.Control>
+            </div>
+            <div className='d-flex flex-col'>
+                <PersonCircle></PersonCircle>
+            </div>
+        </div>
+    );
+}
+
+const old = `
+<header className="d-flex flex-div">
+            <nav className="navbar flex-gdiv-1 p-2 bg-primary text-light">
+                <NavbarToggle className="navbar-toggler d-sm-none" type="button" data-bs-toggle="divlapse"
+                    data-bs-target="#divlapsable">
                     <List className="bi bi-list bg-primary text-light"></List>
-                </button>
+                </NavbarToggle>
                 <brand-logo>
-                    <CollectionPlayFill className="bi bi-collection-play"></CollectionPlayFill>
+                    <divlectionPlayFill className="bi bi-divlection-play"></divlectionPlayFill>
                     <text className="h3">Film Library</text>
                 </brand-logo>
                 <search-box className="d-none d-sm-block">
@@ -24,5 +39,4 @@ export default function NavigationBar() {
                 </user-icon>
             </nav>
         </header>
-    );
-}
+`;
