@@ -37,8 +37,6 @@ function App() {
 
   useEffect(
     () => {
-      const filmArray = [];
-
       switch (activeFilter) {
         case "All":
           setFilmArray(filmLibrary.films);
