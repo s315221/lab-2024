@@ -1,7 +1,17 @@
-export default function SideBar() {
+import FilterList from "./FilterList";
+
+export default function SideBar(props) {
     return (
-        <>
-            <main className="d-flex flex-column flex-sm-row">
+        props.is === 'filter-list' ?
+            <FilterList className={props.className} filters={props.filters} variant={props.variant} />
+            :
+            <>
+            </>
+    );
+}
+
+const old = `
+<main className="d-flex flex-column flex-sm-row">
                 <search-box className="collapse d-sm-none flex-fill flex-column align-self-stretch m-2" id="collapsable">
                     <form className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" />
@@ -45,6 +55,4 @@ export default function SideBar() {
                 </film-table>
 
             </main>
-        </>
-    );
-}
+`

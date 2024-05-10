@@ -9,7 +9,7 @@ export default function Branding(props) {
     return (
         <span>
             <CollectionPlayFill fontSize={props.fontSize} ></CollectionPlayFill>
-            <span style={{ 'font-size': props.fontSize }} >Film Library</span>
+            <span style={{ 'fontSize': props.fontSize }} >Film Library</span>
         </span>
     )
 }
