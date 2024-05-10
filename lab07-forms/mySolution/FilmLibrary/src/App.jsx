@@ -35,29 +35,37 @@ function App() {
   const [filmArray, setFilmArray] = useState(filmLibrary.films);
   const [activeFilter, setActiveFilter] = useState(filters[0]);
 
-  useEffect(
-    () => {
-      switch (activeFilter) {
-        case "All":
-          setFilmArray(filmLibrary.films);
-          break;
-        case "Favorites":
-          setFilmArray(filmLibrary.getFavorites());
-          break;
-        case "Best Rated":
-          setFilmArray(filmLibrary.getBestRated());
-          break;
-        case "Seen Last Month":
-          setFilmArray(filmLibrary.getSeenAfter(dayjs().subtract(1, 'month').startOf('month')));
-          break;
-        case "Unseen":
-          setFilmArray(filmLibrary.getUnSeen());
-          break;
-        default:
-          setFilmArray([]);
-      }
-    }, [activeFilter]
-  );
+  function addNewFilm(film) {
+    filmLibrary.addNewFilm(film);
+    updateFilmTable();
+  }
+
+  const updateFilmTable = () => {
+
+    switch (activeFilter) {
+      case "All":
+        setFilmArray(filmLibrary.films);
+        break;
+      case "Favorites":
+        setFilmArray(filmLibrary.getFavorites());
+        break;
+      case "Best Rated":
+        setFilmArray(filmLibrary.getBestRated());
+        break;
+      case "Seen Last Month":
+        setFilmArray(filmLibrary.getSeenAfter(dayjs().subtract(1, 'month').startOf('month')));
+        break;
+      case "Unseen":
+        setFilmArray(filmLibrary.getUnSeen());
+        break;
+      default:
+        setFilmArray([]);
+    }
+  }
+
+  useEffect(updateFilmTable, [activeFilter]);
+
+
 
   return (
     <div className='d-flex flex-column flex-fill'>
@@ -66,7 +74,7 @@ function App() {
       </header>
       <div className='d-flex flex-row'>
         <SideBar className='d-flex flex-column col-3 bg-light' is='filter-list' filters={filters} activeFilter={activeFilter} variant="light" setActiveFilter={setActiveFilter} />
-        <Content className='d-flex flex-column' is='film-table' filmArray={filmArray} activeFilter={activeFilter} />
+        <Content className='d-flex flex-column' is='film-table' filmArray={filmArray} activeFilter={activeFilter} addNewFilm={addNewFilm} />
       </div>
     </div>
   )

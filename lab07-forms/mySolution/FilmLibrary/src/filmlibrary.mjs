@@ -4,10 +4,10 @@ import dayjs from 'dayjs'
 
 
 export function Film(id, title, isFavorite = false, date, rating, userId = 1) {
-    this.id = id;
+    this.id = id || Math.random();
     this.title = title;
     this.isFavorite = isFavorite;
-    this.date = date;
+    this.date = date ? dayjs(date) : null;
     this.rating = rating;
     this.userId = userId;
 
@@ -19,6 +19,9 @@ export function FilmLibrary() {
     this.films = [];
 
     this.addNewFilm = (film) => this.films.push(film);
+
+
+
 
     this.sortByDate = () => [...this.films].sort((a, b) =>
         !a.date ? 1 : // if first date null, then it is larger so +1
