@@ -18,7 +18,7 @@ const grams21 = new Film(2, "21 Grams", true, "2024-04-17", 4);
 const starWars = new Film(3, "Star Wars", false);
 const matrix = new Film(4, "Matrix", true);
 const shrek = new Film(5, "Shrek", false, "2024-04-21", 3);
-const shrek2 = new Film(52, "Shrek 2", false, "2024-04-01", 3);
+const shrek2 = new Film(52, "Shrek 2", false, "2024-04-01", 2);
 
 let filmLibrary = new FilmLibrary();
 filmLibrary.addNewFilm(pulpFiction);
@@ -37,6 +37,12 @@ function App() {
 
   function addNewFilm(film) {
     filmLibrary.addNewFilm(film);
+    updateFilmTable();
+  }
+
+  function editFilm(film) {
+    console.log("editing ", film)
+    filmLibrary.editFilm(film);
     updateFilmTable();
   }
 
@@ -74,7 +80,7 @@ function App() {
       </header>
       <div className='d-flex flex-row'>
         <SideBar className='d-flex flex-column col-3 bg-light' is='filter-list' filters={filters} activeFilter={activeFilter} variant="light" setActiveFilter={setActiveFilter} />
-        <Content className='d-flex flex-column' is='film-table' filmArray={filmArray} activeFilter={activeFilter} addNewFilm={addNewFilm} />
+        <Content className='d-flex flex-column' is='film-table' filmArray={filmArray} activeFilter={activeFilter} addNewFilm={addNewFilm} editFilm={editFilm} />
       </div>
     </div>
   )

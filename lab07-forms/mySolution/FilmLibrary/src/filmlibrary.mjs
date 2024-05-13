@@ -2,14 +2,19 @@
 
 import dayjs from 'dayjs'
 
+let nextId = 1;
 
 export function Film(id, title, isFavorite = false, date, rating, userId = 1) {
-    this.id = id || Math.random();
+
+    this._id = nextId++;
+    this.id = id || (Math.floor(Math.random() * (2 ** 32)));
     this.title = title;
     this.isFavorite = isFavorite;
     this.date = date ? dayjs(date) : null;
     this.rating = rating;
     this.userId = userId;
+
+    console.log("added ", { ...this });
 
     this.toString = () => `Id: ${this.id}, Title: ${this.title}, Favorite: ${this.isFavorite}, Watch date: ${this.date}, Score: ${this.rating}, User: ${this.userId}`;
 
@@ -20,7 +25,9 @@ export function FilmLibrary() {
 
     this.addNewFilm = (film) => this.films.push(film);
 
-
+    this.editFilm = (film) => {
+        this.films[this.films.findIndex(f => f._id === film._id)] = { ...film };
+    }
 
 
     this.sortByDate = () => [...this.films].sort((a, b) =>
